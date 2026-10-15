@@ -273,6 +273,7 @@ public class AuditLoaderPlugin extends Plugin implements AuditPlugin {
         public static final String PROP_MAX_BATCH_SIZE = "max_batch_size";
         public static final String PROP_MAX_BATCH_INTERVAL_SEC = "max_batch_interval_sec";
         public static final String PROP_FRONTEND_HOST_PORT = "frontend_host_port";
+        public static final String PROP_USE_HTTPS = "use_https";
         public static final String PROP_USER = "user";
         public static final String PROP_PASSWORD = "password";
         public static final String PROP_DATABASE = "database";
@@ -288,6 +289,7 @@ public class AuditLoaderPlugin extends Plugin implements AuditPlugin {
         public long maxBatchSize = 50 * 1024 * 1024;
         public long maxBatchIntervalSec = 60;
         public String frontendHostPort = "127.0.0.1:8030";
+        public boolean useHttps = false;
         public String user = "root";
         public String password = "";
         public String database = "starrocks_audit_db__";
@@ -314,6 +316,9 @@ public class AuditLoaderPlugin extends Plugin implements AuditPlugin {
                 }
                 if (properties.containsKey(PROP_FRONTEND_HOST_PORT)) {
                     frontendHostPort = properties.get(PROP_FRONTEND_HOST_PORT);
+                }
+                if (properties.containsKey(PROP_USE_HTTPS)) {
+                    useHttps = Boolean.parseBoolean(properties.get(PROP_USE_HTTPS).trim());
                 }
                 if (properties.containsKey(PROP_USER)) {
                     user = properties.get(PROP_USER);
