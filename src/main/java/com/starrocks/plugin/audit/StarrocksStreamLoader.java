@@ -34,7 +34,7 @@ import java.util.UUID;
 
 public class StarrocksStreamLoader {
     private final static Logger LOG = LogManager.getLogger(StarrocksStreamLoader.class);
-    private static String loadUrlPattern = "http://%s/api/%s/%s/_stream_load?";
+    private static String loadUrlPattern = "%s://%s/api/%s/%s/_stream_load?";
     private static Integer TEMPORARY_REDIRECT_CODE = 307;
     private String hostPort;
     private String db;
@@ -53,7 +53,7 @@ public class StarrocksStreamLoader {
         this.user = conf.user;
         this.passwd = conf.password;
 
-        this.loadUrlStr = String.format(loadUrlPattern, hostPort, db, tbl);
+        this.loadUrlStr = String.format(loadUrlPattern, conf.useHttps ? "https" : "http", hostPort, db, tbl);
         String secretKey = conf.secretKey;
         if(!StringUtils.isBlank(secretKey.trim())) {
             try {
